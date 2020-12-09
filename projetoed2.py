@@ -194,30 +194,6 @@ class No:
 
 ######## </stack_overflow>
 
-def balanco_exec(self):
-    a = self.balanco()
-    print(0, self)
-    if a > 1:
-      print(1)
-      if self.left.balanco() < 0:
-        print(2)
-        self = rotacao_esq(self)
-        print(3)
-      self = rotacao_dir(self)
-      print(4)
-      return self
-    elif a < -1:
-      print(5, self)
-      if self.dir.balanco() > 0:
-        print(6, self)
-        self = rotacao_dir(self)
-        print(7)
-      self = rotacao_esq(self)
-      print(8)
-      return self
-    else:
-      return self
-
 """# Tree"""
 
 class BinaryTree:
@@ -278,23 +254,6 @@ def buscaANO(raiz, chave):
     else:
       return 'chave não encontrada'
     buscaANO(raiz.esq, chave)
-
-"""# Teste"""
-
-temp = Dado(1,1,1)
-temp2 = Dado(2,2,2)
-temp3 = Dado(3,3,3)
-
-raiz = No(temp)
-x1 = No(temp2)
-x2 = No(temp3)
-
-insere(raiz, x2)
-insere(raiz, x1)
-
-raiz.display()
-raiz = raiz.balanco_exec()
-raiz.display()
 
 """# Menu"""
 
