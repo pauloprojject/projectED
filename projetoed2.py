@@ -132,9 +132,13 @@ class No:
   def balanco_exec(self):
     a = self.balanco()
     if a > 1:
+      if self.esq.balanco() < 0:
+        self.esq = rotacao_esq(self.esq)
       self = rotacao_dir(self)
       return self
     elif a < -1:
+      if self.dir.balanco() > 0:
+        self.dir = rotacao_dir(self.dir)
       self = rotacao_esq(self)
       return self
     else:
@@ -190,6 +194,30 @@ class No:
 
 ######## </stack_overflow>
 
+def balanco_exec(self):
+    a = self.balanco()
+    print(0, self)
+    if a > 1:
+      print(1)
+      if self.left.balanco() < 0:
+        print(2)
+        self = rotacao_esq(self)
+        print(3)
+      self = rotacao_dir(self)
+      print(4)
+      return self
+    elif a < -1:
+      print(5, self)
+      if self.dir.balanco() > 0:
+        print(6, self)
+        self = rotacao_dir(self)
+        print(7)
+      self = rotacao_esq(self)
+      print(8)
+      return self
+    else:
+      return self
+
 """# Tree"""
 
 class BinaryTree:
@@ -212,6 +240,7 @@ def rotacao_esq(arvore):
     aux.esq = arvore
 
     return aux
+
 
 def insere(raiz, no):
   if raiz.dado.id < no.dado.id:
@@ -250,10 +279,29 @@ def buscaANO(raiz, chave):
       return 'chave não encontrada'
     buscaANO(raiz.esq, chave)
 
+"""# Teste"""
+
+temp = Dado(1,1,1)
+temp2 = Dado(2,2,2)
+temp3 = Dado(3,3,3)
+
+raiz = No(temp)
+x1 = No(temp2)
+x2 = No(temp3)
+
+insere(raiz, x2)
+insere(raiz, x1)
+
+raiz.display()
+raiz = raiz.balanco_exec()
+raiz.display()
+
 """# Menu"""
 
+nomes = []
 print('Adiciona o nó raiz:')
 nome = input("Insira o nome do filme: ")
+nomes.append(nome)
 idd = int(input("Insira o ID do filme: "))
 ano = int(input("Insira o ano de lançamento do filme: "))
 filme = Dado(idd,nome,ano)
@@ -265,13 +313,14 @@ while True:
   if menu == 1:
     while True:
       nome = input("Insira o nome do filme: ")
+      nomes.append(nome)
       idd = int(input("Insira o ID do filme: "))
       ano = int(input("Insira o ano de lançamento do filme: "))
       filme = Dado(idd,nome,ano)
       add = No(filme)
       insere(raiz, add)
-      loop = input("Deseja adicionar outro filme? S/N \n").upper()
       raiz = raiz.balanco_exec()
+      loop = input("Deseja adicionar outro filme? S/N \n").upper()
       if loop == 'N':
         break
   if menu == 2:
@@ -291,7 +340,7 @@ while True:
       if loop == "N":
         break
   if menu == 4:
-    print('miou')
+    print(sorted(nomes))
   if menu == 5:
     print('A altura da árvore é: ' + str(raiz.profundidade()))
   if menu == 6:
