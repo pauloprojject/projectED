@@ -239,7 +239,7 @@ def buscaID(raiz, chave):
       atual = atual.dir
     if atual == None:
       return 'chave não encontrada'
-  return atual.dado
+  return f'Nome: {atual.dado.nome}, Ano: {atual.dado.ano}'
 
 def buscaANO(raiz, chave):
   if raiz != None:
