@@ -247,7 +247,7 @@ def buscaANO(raiz, chave):
     if raiz.dado.ano == chave:
       print(raiz.dado)
     else:
-      pass
+      return 'chave não encontrada'
     buscaANO(raiz.esq, chave)
 
 """# Menu"""
